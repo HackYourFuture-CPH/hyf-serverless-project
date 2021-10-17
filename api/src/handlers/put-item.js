@@ -1,9 +1,9 @@
 const dynamodb = require('aws-sdk/clients/dynamodb');
 const docClient = new dynamodb.DocumentClient();
 
-const tableName = process.env.SAMPLE_TABLE;
+const tableName = process.env.personsTable;
 
-exports.putItemHandler = async (event) => {
+exports.putPersonsHandler = async (event) => {
     if (event.httpMethod !== 'POST') {
         throw new Error(`postMethod only accepts POST method, you tried: ${event.httpMethod} method.`);
     }
