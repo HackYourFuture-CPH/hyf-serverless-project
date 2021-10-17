@@ -2,8 +2,6 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: >-
   serverlessproject
 Transform:
-- AWS::Serverless-2016-10-31
-
 Globals:
   Api:
     Cors:
@@ -11,9 +9,6 @@ Globals:
       AllowHeaders: "'*'"
       AllowMethods: "'*'"
 
-Resources:
-  MyApi:
-    Type: AWS::Serverless::Api
     Properties:
       StageName: Prod
   getAllPersonsFunction:
@@ -36,7 +31,7 @@ Resources:
           Properties:
             Path: /
             Method: GET
-            RestApiId: !Ref MyApi 
+            RestApiId: !Ref MyApi
   putPersonsFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -46,18 +41,17 @@ Resources:
       Timeout: 100
       Description: A simple example includes a HTTP post method to add one item to a DynamoDB table.
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref PersonsTable
-      Environment:
-        Variables:
-          personsTable: !Ref PersonsTable
+        DynamoDBCrudPolicy:
+          TableName: !Ref SampleTable
+        SNSPublishMessagePolicy:
+          TopicName: Alumni_Got_Employed
       Events:
         Api:
           Type: Api
           Properties:
             Path: /
             Method: POST
-            RestApiId: !Ref MyApi 
+            RestApiId: !Ref MyApi
   PersonsTable:
     Type: AWS::Serverless::SimpleTable
     Name: PersonsTable
