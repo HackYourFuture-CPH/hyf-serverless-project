@@ -3,79 +3,55 @@ Description: >-
   serverlessproject
 Transform:
 - AWS::Serverless-2016-10-31
-Parameters:
-  Type: String
-  
+
 Resources:
-  getAllItemsFunction:
+  getAllPersonsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/get-all-items.getAllItemsHandler
+      Handler: src/handlers/get-all-items.getAllPersonsHandler
       Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
       Description: A simple example includes a HTTP get method to get all items from a DynamoDB table.
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref SampleTable
+            TableName: !Ref PersonsTable
       Environment:
         Variables:
-          SAMPLE_TABLE: !Ref SampleTable
+          personsTable: !Ref PersonsTable
       Events:
         Api:
           Type: Api
           Properties:
             Path: /
-            Method: GET
-  getByIdFunction:
+            Method: GET 
+  putPersonsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/get-by-id.getByIdHandler
-      Runtime: nodejs14.x
-      MemorySize: 128
-      Timeout: 100
-      Description: A simple example includes a HTTP get method to get one item by id from a DynamoDB table.
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref SampleTable
-      Environment:
-        Variables:
-          SAMPLE_TABLE: !Ref SampleTable
-      Events:
-        Api:
-          Type: Api
-          Properties:
-            Path: /{id}
-            Method: GET
-  putItemFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: src/handlers/put-item.putItemHandler
+      Handler: src/handlers/put-item.putPersonsHandler
       Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 100
       Description: A simple example includes a HTTP post method to add one item to a DynamoDB table.
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref SampleTable
+            TableName: !Ref PersonsTable
       Environment:
         Variables:
-          SAMPLE_TABLE: !Ref SampleTable
+          personsTable: !Ref PersonsTable
       Events:
         Api:
           Type: Api
           Properties:
             Path: /
             Method: POST
-  SampleTable:
+  PersonsTable:
     Type: AWS::Serverless::SimpleTable
+    Name: PersonsTable
     Properties:
       PrimaryKey:
         Name: id
         Type: String
-      ProvisionedThroughput:
-        ReadCapacityUnits: 2
-        WriteCapacityUnits: 2
 
 Outputs:
   WebEndpoint:

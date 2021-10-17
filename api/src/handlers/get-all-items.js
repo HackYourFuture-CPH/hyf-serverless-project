@@ -1,11 +1,10 @@
 
-const tableName = process.env.SAMPLE_TABLE;
+const tableName = process.env.personsTable;
 
 const dynamodb = require('aws-sdk/clients/dynamodb');
 const docClient = new dynamodb.DocumentClient();
 
-
-exports.getAllItemsHandler = async (event) => {
+exports.getAllPersonsHandler = async (event) => {
     if (event.httpMethod !== 'GET') {
         throw new Error(`getAllItems only accept GET method, you tried: ${event.httpMethod}`);
     }
