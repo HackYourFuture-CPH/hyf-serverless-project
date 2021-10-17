@@ -10,12 +10,20 @@ exports.putPersonsHandler = async (event) => {
     console.info('received:', event);
 
     const body = JSON.parse(event.body)
-    const id = body.id;
-    const name = body.name;
 
     var params = {
         TableName : tableName,
-        Item: { id : id, name: name }
+        Item: {
+            id: body.id,
+            fullname: body.fullname,
+            classNr: body.classNr,
+            position: body.position,
+            company: body.company,
+            aboutJob: body.aboutJob,
+            interviewRounds: body.interviewRounds,
+            assignment: body.assignment,
+            imageUrl: "?"
+        }
     };
 
     const result = await docClient.put(params).promise();
