@@ -4,7 +4,18 @@ Description: >-
 Transform:
 - AWS::Serverless-2016-10-31
 
+Globals:
+  Api:
+    Cors:
+      AllowOrigin: "'*'"
+      AllowHeaders: "'*'"
+      AllowMethods: "'*'"
+
 Resources:
+  MyApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
   getAllPersonsFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -24,7 +35,8 @@ Resources:
           Type: Api
           Properties:
             Path: /
-            Method: GET 
+            Method: GET
+            RestApiId: !Ref MyApi 
   putPersonsFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -45,6 +57,7 @@ Resources:
           Properties:
             Path: /
             Method: POST
+            RestApiId: !Ref MyApi 
   PersonsTable:
     Type: AWS::Serverless::SimpleTable
     Name: PersonsTable
@@ -56,4 +69,4 @@ Resources:
 Outputs:
   WebEndpoint:
     Description: "API Gateway endpoint URL for Prod stage"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+    Value: !Sub "https://${MyApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
