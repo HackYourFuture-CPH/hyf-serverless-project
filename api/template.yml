@@ -6,7 +6,21 @@ Transform:
 Parameters:
   Type: String
   
+Globals:
+  Api:
+    Cors:
+      AllowOrigin: "'*'"
+      AllowHeaders: "'*'"
+      AllowMethods: "'*'"
+
 Resources:
+  MyApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      BinaryMediaTypes:
+        - '*~1*'
+
   getAllItemsFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -67,6 +81,8 @@ Resources:
           Properties:
             Path: /image/upload
             Method: POST
+            BinaryMediaTypes:
+              - '*~1*'
   SampleTable:
     Type: AWS::Serverless::SimpleTable
     Properties:
