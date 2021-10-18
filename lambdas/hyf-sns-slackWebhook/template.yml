@@ -5,7 +5,7 @@
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/format-version-structure.html
 AWSTemplateFormatVersion: 2010-09-09
 Description: >-
-  slack-webhook
+  hyf-sns-slackWebhook
 
 # Transform section specifies one or more macros that AWS CloudFormation uses to process your template
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html
@@ -37,4 +37,6 @@ Resources:
             Topic: !Ref SimpleTopic
       MemorySize: 128
       Timeout: 100
-      Policies: AmazonDynamoDBFullAccess #Give DynamoDB Full Access to your Lambda Function
+      Policies:
+        - AmazonDynamoDBFullAccess #Give DynamoDB Full Access to your Lambda Function
+        - AWSLambdaBasicExecutionRole # Give Lambda basic execution Permission to the helloFromLambda
