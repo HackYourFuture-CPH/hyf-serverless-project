@@ -2,7 +2,7 @@ import FormComponent from "../components/FormComponent";
 
 const index = () => {
   return (
-    <div>
+    <div className="font-mono">
       <FormComponent />
     </div>
   );
