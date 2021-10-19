@@ -47,7 +47,7 @@ const FormItems = () => {
             onSubmit={handleSubmit}
             method="POST"
           >
-            <h1 className="font-bold text-base md:text-lg text-blue-800">
+            <h1 className="font-bold mt-2 text-base md:text-lg text-blue-800">
               Fill out the form:
             </h1>
 
@@ -55,7 +55,7 @@ const FormItems = () => {
               <div className="col-span-12">
                 <label
                   htmlFor="fullName"
-                  className="block text-sm ml-2 font-medium text-gray-700"
+                  className="block text-sm m-2 font-medium text-gray-700"
                 >
                   Full Name*
                 </label>
