@@ -15,20 +15,23 @@ const FormItems = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData);
   };
 
-  const handleSubmit = () => {
-    fetch("https://o3fp0fun12.execute-api.us-east-1.amazonaws.com/Prod/", {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const data = { formData };
+    const requestOptions = {
       method: "POST",
-      body: JSON.stringify(formData),
-    })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
+    fetch(
+      "https://o3fp0fun12.execute-api.us-east-1.amazonaws.com/Prod/",
+      requestOptions
+    )
       .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        setFormData(formData);
-      })
-      .catch((err) => console.log("error", err));
+      .then((res) => console.log(res));
   };
 
   return (
@@ -41,12 +44,7 @@ const FormItems = () => {
             alt="form/img"
             width="512"
           />
-          <form
-            className="space-y-4 w-full md:w-1/3 rounded-lg items-center"
-            action="#"
-            onSubmit={handleSubmit}
-            method="POST"
-          >
+          <form className="space-y-4 w-full md:w-1/3 rounded-lg items-center">
             <h1 className="font-bold mt-2 text-base md:text-lg text-blue-800">
               Fill out the form:
             </h1>
@@ -141,10 +139,13 @@ const FormItems = () => {
                 >
                   How many rounds of interviews you had?*
                 </label>
-                <textarea
-                  className="form-textarea pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                <input
+                  type="number"
+                  name="interviewRounds"
+                  id="interviewRounds"
                   onChange={handleChange}
-                  rows="3"
+                  autoComplete="classNr"
+                  className="placeholder-gray-500 pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 />
               </div>
             </div>
@@ -195,6 +196,7 @@ const FormItems = () => {
             <div>
               <button
                 type="submit"
+                onClick={handleSubmit}
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Submit
