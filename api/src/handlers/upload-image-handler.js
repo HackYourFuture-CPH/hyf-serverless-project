@@ -1,45 +1,43 @@
-// import * as multipart from "parse-multipart"
-// import Buffer from 'parse-multipart';
-// const multipart = require('parse-multipart');
-const multipart = require('parse-multipart');
-
-const Buffer = require('buffer').Buffer;
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
+let mime = require('mime-types')
+
 exports.uploadImageHandler = async (event) => {
 
-    // console.info('received:', event);
+    console.log("Request received");
 
-    // const body = JSON.parse(event.body)
-    const body = event.body;
-    const bodyBuffer = Buffer.from(event.body);
-    const boundary = multipart.getBoundary(event.headers["content-type"]);
-    const parts = multipart.Parse(bodyBuffer, boundary);
+    // Extract file content
+    // let fileContent = event.isBase64Encoded ? Buffer.from(event.body, 'base64') : event.body;
+    let fileContent = Buffer.from(event.body, 'base64');
 
-    if (parts[0]?.filename) console.log(`Original filename = ${parts[0]?.filename}`);
-    if (parts[0]?.type) console.log(`Content type = ${parts[0]?.type}`);
-    if (parts[0]?.data?.length) console.log(`Size = ${parts[0]?.data?.length}`);
+    // Generate file name from current timestamp
+    let fileName = `${Date.now()}`;
 
-    const params = {
-        Bucket: record.s3.bucket.hyf-imageupload-bucket,
-        Key: record.s3.object.key
-      };
+    // Determine file extension
+    let contentType = event.headers['content-type'] || event.headers['Content-Type'];
+    let extension = contentType ? mime.extension(contentType) : '';
 
-    const response = {
-        statusCode: 200,
-        // body: JSON.stringify(body)
+    let fullFileName = extension ? `${fileName}.${extension}` : fileName;
+
+    // Upload the file to S3
+    try {
+        let data = await s3.putObject({
+            Bucket: "hyf-imageupload-bucket",
+            Key: fullFileName,
+            Body: fileContent,
+            Metadata: {},
+        }).promise();
+
+        console.log("Successfully uploaded file", fullFileName);
+        console.log("event.headers", event.headers);
+        
+        return response = {
+            statusCode: 200,
+            body: 'Successfully uploaded'
+        }; 
+
+    } catch (err) {
+        console.log("Failed to upload file", fullFileName, err);
+        throw err;
     };
-
-//     return s3.putObject({
-//     Bucket: 'your-bucket',
-//     Key: 'file-renamed.png',
-//     Body: event.body,
-//     Metadata: { 'type': 'png', 'user': 'Priyanka Pandey' }
-//   }).catch(err => {
-//         console.error("Error calling S3 getObject:", err);
-//         return (err);
-//       })
-
-//     console.info(`response from: ${event.path} statusCode: ${response.statusCode} body: ${response.body}`);
-    return response;
-}
+};
