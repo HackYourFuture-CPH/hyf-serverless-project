@@ -1,6 +1,7 @@
 /**
  * A Lambda function that logs the payload received from SNS.
  */
+require("dotenv").config();
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
@@ -10,7 +11,7 @@ const db = new aws.DynamoDB({
   maxRetries: 1,
 });
 
-const tableName = process.env.personsTable;
+const tableName = process.env.PERSONS_TABLE;
 
 exports.snsPayloadLoggerHandler = async (event, context) => {
   //console.log(event.Records[0].Sns.Message);
@@ -28,36 +29,36 @@ exports.snsPayloadLoggerHandler = async (event, context) => {
     attachments: [
       {
         color: "#2A3A7D", // color of the attachments sidebar.
-        image_url: JSON.stringify(result["Item"].imageUrl.S),
+        image_url: result["Item"].imageUrl.S,
         fields: [
           {
             title: "Congratulations to:", // Custom field
-            value: JSON.stringify(result["Item"].fullname.S), // Custom value
+            value: result["Item"].fullname.S, // Custom value
             short: false, // long fields will be full width
           },
           {
             title: "Hired by:",
-            value: JSON.stringify(result["Item"].company.S),
+            value: result["Item"].company.S,
             short: false,
           },
           {
             title: "Position:",
-            value: JSON.stringify(result["Item"].position.S),
+            value: result["Item"].position.S,
             short: false,
           },
           {
             title: "From class nr:",
-            value: JSON.stringify(result["Item"].classNr.S),
+            value: result["Item"].classNr.S,
             short: false,
           },
           {
             title: "How many rounds of intereview:",
-            value: JSON.stringify(result["Item"].interviewRounds.S),
+            value: result["Item"].interviewRounds.S,
             short: false,
           },
           {
             title: "Code assignment:",
-            value: JSON.stringify(result["Item"].assignment.S),
+            value: result["Item"].assignment.S,
             short: false,
           },
         ],
@@ -65,7 +66,8 @@ exports.snsPayloadLoggerHandler = async (event, context) => {
     ],
   };
 
-  const slackURL = process.env.slackURL
+  const slackURL = process.env.SLACK_URL;
+
   await fetch(slackURL, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
