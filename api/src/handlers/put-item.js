@@ -12,7 +12,7 @@ exports.putPersonsHandler = async (event, context) => {
   console.info("received:", event);
 
   const body = JSON.parse(event.body);
-  var params = {
+  const params = {
     TableName: tableName,
     Item: {
       id: body.id,
