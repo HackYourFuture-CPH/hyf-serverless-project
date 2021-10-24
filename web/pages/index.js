@@ -152,6 +152,7 @@ const dummyData = [{
  }]
 export async function getStaticProps(context) {
   const res = await fetch(baseURL);
+  // const data = await res.json() ;
   const data = await dummyData ;
 
   if (!data) {
