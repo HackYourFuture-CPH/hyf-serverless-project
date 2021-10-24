@@ -12,7 +12,7 @@ export default function Home({ data }) {
         <Header />
         <Main />
       </div>
-      <div className="flex overflow-x-auto space-x-3 pt-3 pb-10">
+      <div className="grid grid-cols-2 gap-4 pt-3 p-4">
         {data &&
           data.map((member) => {
             return (
@@ -21,7 +21,7 @@ export default function Home({ data }) {
                 key={member.id}
               >
                 <img
-                  className="w-32 h-32 md:w-full md:h-auto md:rounded-none mx-auto"
+                  className="w-full h-auto  md:rounded-none mx-auto"
                   src={member.imageUrl}
                   alt={member.fullname}
                 />
@@ -87,10 +87,10 @@ export default function Home({ data }) {
             Did you find a job and you want to share the good news with the
             community?{" "}
           </p>
-          <div className="w-2/6 bg-indigo-900 m-5 p-2">
+          <div className="max-w-md bg-indigo-900 m-5 p-2">
             {/* link to form page */}
-            <Link href="/">
-              <a className="whitespace-nowrap text-white p-10">
+            <Link  href="../FormComponent">
+              <a className="whitespace-nowrap text-white p-10 ">
                 SHARE YOUR STORY
               </a>
             </Link>
@@ -104,9 +104,56 @@ export default function Home({ data }) {
   );
 }
 
+const dummyData = [{
+  "id": "1",
+  "imageUrl": "http://placehold.it/120x120&text=image1",
+  "github": "https://github.com/basafilm",
+  "company": "Google",
+  "linkedIn": "https://www.linkedin.com/in/malek-shafi-i-8b874518/?originalSubdomain=dk",
+  "interviewRounds": "120",
+  "classNr": "13",
+  "fullname": "Mælek Shafi'i",
+  "position": "Full Stack Developer",
+  "assignment": "test.com"
+ },
+ {
+  "id": "2",
+  "imageUrl": "http://placehold.it/120x120&text=image1",
+  "github": "https://github.com/basafilm",
+  "company": "Google",
+  "linkedIn": "https://www.linkedin.com/in/malek-shafi-i-8b874518/?originalSubdomain=dk",
+  "interviewRounds": "120",
+  "classNr": "13",
+  "fullname": "Mælek Shafi'i",
+  "position": "Full Stack Developer",
+  "assignment": "test.com"
+ },{
+  "id": "3",
+  "imageUrl": "http://placehold.it/120x120&text=image1",
+  "github": "https://github.com/basafilm",
+  "company": "Google",
+  "linkedIn": "https://www.linkedin.com/in/malek-shafi-i-8b874518/?originalSubdomain=dk",
+  "interviewRounds": "120",
+  "classNr": "13",
+  "fullname": "Mælek Shafi'i",
+  "position": "Full Stack Developer",
+  "assignment": "test.com"
+ },{
+  "id": "4",
+  "imageUrl": "http://placehold.it/120x120&text=image1",
+  "github": "https://github.com/basafilm",
+  "company": "Google",
+  "linkedIn": "https://www.linkedin.com/in/malek-shafi-i-8b874518/?originalSubdomain=dk",
+  "interviewRounds": "120",
+  "classNr": "13",
+  "fullname": "Mælek Shafi'i",
+  "position": "Full Stack Developer",
+  "assignment": "test.com"
+ }]
 export async function getStaticProps(context) {
   const res = await fetch(baseURL);
-  const data = await res.json();
+  // const data = await res.json() ;
+  const data = await dummyData ;
 
   if (!data) {
     return {
