@@ -1,30 +1,17 @@
 import React, { useState } from "react";
 import FileBase from "react-file-base64";
 import { useForm } from "react-hook-form";
-
-const initialState = {
-  id: "3",
-  fullName: "",
-  classNr: "",
-  position: "",
-  company: "",
-  aboutJob: "",
-  interviewRounds: "",
-  assignment: "",
-  //imageUrl: "",
-};
 const FormItems = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [formData, setFormData] = useState(initialState);
 
-  const submitForm = () => {
+  const submitForm = (formData) => {
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" }, 
       body: JSON.stringify(formData),
     };
     fetch("https://o3fp0fun12.execute-api.us-east-1.amazonaws.com/Prod/", requestOptions)
@@ -45,8 +32,7 @@ const FormItems = () => {
           <form
             className="space-y-4 w-full md:w-1/3 rounded-lg items-center"
             onSubmit={handleSubmit((data) => {
-              setFormData(data);
-              submitForm();
+              submitForm(data);
             })}
           >
             <h1 className="font-bold mt-2 text-base md:text-lg text-blue-800">
@@ -192,20 +178,13 @@ const FormItems = () => {
                     Upload Image(jpg,png,svg,jpeg)
                   </label>
                   <br />
-                  <FileBase
-                    type="file"
-                    multiple={false}
-                    onDone={({ base64 }) =>
-                      setFormData({ ...formData, selectedFile: base64 })
-                    }
-                  />
+                  <input type="file" name="imageUrl" />
                 </div>
               </div>
             </div>
             <div>
               <button
                 type="submit"
-                onClick={handleSubmit}
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Submit
