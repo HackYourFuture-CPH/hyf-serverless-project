@@ -14,6 +14,7 @@ const db = new aws.DynamoDB({
 const tableName = process.env.PERSONS_TABLE;
 
 exports.snsPayloadLoggerHandler = async (event, context) => {
+  console.log("Event " + JSON.stringify(event));
   var params = {
     TableName: tableName,
     Key: { id: { S: event.Records[0].Sns.Message } }, //id from sns event.Records[0].Sns.Message
