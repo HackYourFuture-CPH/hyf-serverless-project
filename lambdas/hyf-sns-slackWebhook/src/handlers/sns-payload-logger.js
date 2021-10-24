@@ -14,28 +14,36 @@ const db = new aws.DynamoDB({
 const tableName = process.env.PERSONS_TABLE;
 
 exports.snsPayloadLoggerHandler = async (event, context) => {
-  //console.log(event.Records[0].Sns.Message);
   var params = {
     TableName: tableName,
-    Key: { id: { S: "3" } }, //id from sns event.Records[0].Sns.Message
+    Key: { id: { S: event.Records[0].Sns.Message } }, //id from sns event.Records[0].Sns.Message
   };
 
   const result = await db.getItem(params).promise();
 
+  const roundsText = result["Item"].interviewRounds.S > 1 ? "rounds" : "round";
+
   const data = {
     username: "HYF Alumni Hired",
-    text: "A new position has been added :developers:",
     icon_emoji: ":hyf-new:",
+    blocks: [
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `*${result["Item"].fullname.S}* from class *${result["Item"].classNr.S}* just landed a job after *${result["Item"].interviewRounds.S}* interview ${roundsText}! :clap:`,
+        },
+      },
+      {
+        type: "image",
+        image_url: result["Item"].imageUrl.S,
+        alt_text: result["Item"].fullname.S,
+      },
+    ],
     attachments: [
       {
         color: "#2A3A7D", // color of the attachments sidebar.
-        image_url: result["Item"].imageUrl.S,
         fields: [
-          {
-            title: "Congratulations to:", // Custom field
-            value: result["Item"].fullname.S, // Custom value
-            short: false, // long fields will be full width
-          },
           {
             title: "Hired by:",
             value: result["Item"].company.S,
@@ -47,18 +55,13 @@ exports.snsPayloadLoggerHandler = async (event, context) => {
             short: false,
           },
           {
-            title: "From class nr:",
-            value: result["Item"].classNr.S,
-            short: false,
-          },
-          {
-            title: "How many rounds of intereview:",
-            value: result["Item"].interviewRounds.S,
-            short: false,
-          },
-          {
             title: "Code assignment:",
             value: result["Item"].assignment.S,
+            short: false,
+          },
+          {
+            title: "Comment:",
+            value: "Comment goes here", //result["Item"].comment.S,
             short: false,
           },
         ],
