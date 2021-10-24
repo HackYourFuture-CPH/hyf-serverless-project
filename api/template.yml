@@ -35,6 +35,27 @@ Resources:
             Path: /
             Method: GET
             RestApiId: !Ref MyApi
+  getByIdFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/get-by-id.getByIdHandler
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 100
+      Description: A simple example includes a HTTP get method to get one item by id from a DynamoDB table.
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref PersonsTable
+      Environment:
+        Variables:
+          personsTable: !Ref PersonsTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /{id}
+            Method: GET
+            RestApiId: !Ref MyApi
   putPersonsFunction:
     Type: AWS::Serverless::Function
     Properties:
