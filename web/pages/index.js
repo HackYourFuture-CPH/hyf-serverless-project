@@ -49,19 +49,17 @@ export default function Home({ data }) {
                     Class Number: <strong>{member.classNr}</strong>
                   </p>
                 </div>
-                <div className="w-2/4 flex justify-around p-10">
+                <div className="w-2/4 flex justify-around p-10 float-right">
                   <Link className="w-full" href={member.linkedIn}>
                     <img
-             className="w-1/6 h-auto  md:rounded-none mx-auto"
-
+                     className="w-1/6 h-auto  md:rounded-none mx-auto"
                       src="/linkedIn.png"
                       alt={member.linkedIn}
                     />
                   </Link>
                   <Link className="w-full" href={member.github}>
                     <img
-             className="w-1/6 h-auto  md:rounded-none mx-auto"
-
+                     className="w-1/6 h-auto  md:rounded-none mx-auto"
                       src="/github.png"
                       alt={member.github}
                     />
@@ -81,7 +79,7 @@ export default function Home({ data }) {
           />
         </div>
         <div className="w-3/4 h-auto pl-10">
-          <p className="text-4xl text-indigo-900 ">
+          <p className="text-2xl text-indigo-900 ">
             Did you find a job and you want to share the good news with the
             community?{" "}
           </p>
