@@ -2,7 +2,7 @@ const dynamodb = require("aws-sdk/clients/dynamodb");
 const docClient = new dynamodb.DocumentClient();
 const aws = require("aws-sdk"); 
 
-const tableName = process.env.personsTable;
+const tableName = 'HYFAlumnis-PersonsTable-ADUBDS3KB7RW';
 exports.putPersonsHandler = async (event, context) => {
   if (event.httpMethod !== "POST") {
     throw new Error(

@@ -1,5 +1,5 @@
 
-const tableName = process.env.personsTable;
+const tableName = 'HYFAlumnis-PersonsTable-ADUBDS3KB7RW';
 
 const dynamodb = require('aws-sdk/clients/dynamodb');
 const docClient = new dynamodb.DocumentClient();
