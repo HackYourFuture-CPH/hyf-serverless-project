@@ -1,82 +1,119 @@
-import Head from 'next/head'
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Main from "../components/Main";
+import Link from "next/link";
+import Image from "next/image";
+export const baseURL = process.env.AWS_BASE_URL;
 
-export default function Home() {
+export default function Home({ data }) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
-
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+    <div className="flex flex-col w-full h-auto font-mono">
+      <div>
+        <Header />
+        <Main />
+      </div>
+      <div className="flex overflow-x-auto space-x-3 pt-3 pb-10">
+        {data &&
+          data.map((member) => {
+            return (
+              <div
+                className="min-w-3/4 rounded overflow-hidden shadow-lg flex-shrink-0 "
+                key={member.id}
+              >
+                <img
+                  className="w-32 h-32 md:w-full md:h-auto md:rounded-none mx-auto"
+                  src={member.imageUrl}
+                  alt={member.fullname}
+                />
+                <div className="px-6 py-4">
+                  <div className="font-bold text-xl mb-2">
+                    {" "}
+                    {member.fullname}
+                  </div>
+                  <p className="text-gray-700 text-base">
+                    {" "}
+                    Company: <strong>{member.company}</strong>
+                  </p>
+                  <p className="text-gray-700 text-base">
+                    {" "}
+                    Position: <strong>{member.position}</strong>
+                  </p>
+                  <p className="text-gray-700 text-base">
+                    {" "}
+                    Assignment: <strong>{member.assignment}</strong>
+                  </p>
+                  <p className="text-gray-700 text-base">
+                    {" "}
+                    Interview Rounds: <strong>{member.interviewRounds}</strong>
+                  </p>
+                  <p className="text-gray-700 text-base">
+                    Class Number: <strong>{member.classNr}</strong>
+                  </p>
+                </div>
+                <div className="w-2/4 flex justify-around p-10">
+                  <Link className="w-full" href={member.linkedIn}>
+                    <Image
+                      width="20"
+                      height="20"
+                      src="/linkedIn.png"
+                      alt={member.linkedIn}
+                    />
+                  </Link>
+                  <Link className="w-full" href={member.github}>
+                    <Image
+                      width="20"
+                      height="20"
+                      src="/github.png"
+                      alt={member.github}
+                    />
+                  </Link>
+                </div>
+              </div>
+            );
+          })}
+      </div>
+      <dv className="w-full h-auto flex flex-row justify-between p-10">
+        <div className="w-2/6">
+          <Image
+            width="150"
+            height="100"
+            src="/story.png"
+            alt=""
+            layout="responsive"
+          />
         </div>
-      </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
+        <div className="w-3/4 h-auto pl-10">
+          <p className="text-4xl text-indigo-900 ">
+            Did you find a job and you want to share the good news with the
+            community?{" "}
+          </p>
+          <div className="w-2/6 bg-indigo-900 m-5 p-2">
+            {/* link to form page */}
+            <Link href="/">
+              <a className="whitespace-nowrap text-white p-10">
+                SHARE YOUR STORY
+              </a>
+            </Link>
+          </div>
+        </div>
+      </dv>
+      <div>
+        <Footer />
+      </div>
     </div>
-  )
+  );
+}
+
+export async function getStaticProps(context) {
+  const res = await fetch(baseURL);
+  const data = await res.json();
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+  return {
+    props: { data }, // will be passed to the page component as props
+  };
 }
