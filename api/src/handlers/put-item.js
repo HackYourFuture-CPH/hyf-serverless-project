@@ -23,14 +23,25 @@ exports.putPersonsHandler = async (event, context) => {
       aboutJob: body.aboutJob,
       interviewRounds: body.interviewRounds,
       assignment: body.assignment,
+      linkedIn: body.linkedIn,
+      github: body.github,
+      comment: body.comment,
       imageUrl: "?",
     },
   };
+
+  
 
   const result = await docClient.put(params).promise();
 
   const response = {
     statusCode: 200,
+    headers: {
+      "Access-Control-Allow-Headers":
+      "Content-Type,X-Amz-Date,Authorization,X-Api-Key,x-requested-with",
+      "Access-Control-Allow-Origin": "*", // Allow from anywhere
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT,DELETE,PATCH",
+    },
     body: JSON.stringify(body),
   };
 
