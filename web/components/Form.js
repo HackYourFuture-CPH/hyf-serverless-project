@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const Bit = () => {
+const Form = () => {
   const {
     register,
     handleSubmit,
@@ -323,4 +323,4 @@ const Bit = () => {
   );
 };
 
-export default Bit;
+export default Form;
