@@ -1,9 +1,9 @@
-import FormComponent from "../components/FormComponent";
+import Form from "../components/Form";
 
 const index = () => {
   return (
     <div className="font-mono">
-      <FormComponent />
+      <Form />
     </div>
   );
 };
