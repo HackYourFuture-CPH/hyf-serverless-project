@@ -52,14 +52,14 @@ export default function Home({ data }) {
                 <div className="w-2/4 flex justify-around p-10 float-right">
                   <Link className="w-full" href={member.linkedIn}>
                     <img
-                     className="w-1/6 h-auto  md:rounded-none mx-auto"
+                      className="w-1/6 h-auto  md:rounded-none mx-auto"
                       src="/linkedIn.png"
                       alt={member.linkedIn}
                     />
                   </Link>
                   <Link className="w-full" href={member.github}>
                     <img
-                     className="w-1/6 h-auto  md:rounded-none mx-auto"
+                      className="w-1/6 h-auto  md:rounded-none mx-auto"
                       src="/github.png"
                       alt={member.github}
                     />
@@ -72,10 +72,9 @@ export default function Home({ data }) {
       <dv className="w-full h-auto flex flex-row justify-between p-10">
         <div className="w-2/6">
           <img
-         className="w-full h-auto  md:rounded-none mx-auto"
+            className="w-full h-auto  md:rounded-none mx-auto"
             src="/story.png"
             alt=""
-          
           />
         </div>
         <div className="w-3/4 h-auto pl-10">
@@ -85,7 +84,7 @@ export default function Home({ data }) {
           </p>
           <div className="max-w-md bg-indigo-900 m-5 p-2">
             {/* link to form page */}
-            <Link  href="../FormComponent">
+            <Link href="../Form">
               <a className="whitespace-nowrap text-white p-10 ">
                 SHARE YOUR STORY
               </a>
@@ -100,56 +99,64 @@ export default function Home({ data }) {
   );
 }
 
-const dummyData = [{
-  "id": "1",
-  "imageUrl": "/profile.png",
-  "github": "https://github.com/basafilm",
-  "company": "Google",
-  "linkedIn": "https://www.linkedin.com/in/malek-shafi-i-8b874518/?originalSubdomain=dk",
-  "interviewRounds": "120",
-  "classNr": "13",
-  "fullname": "Mælek Shafi'i",
-  "position": "Full Stack Developer",
-  "assignment": "test.com"
- },
- {
-  "id": "2",
-  "imageUrl": "/profile.png",
-  "github": "https://github.com/basafilm",
-  "company": "Google",
-  "linkedIn": "https://www.linkedin.com/in/malek-shafi-i-8b874518/?originalSubdomain=dk",
-  "interviewRounds": "120",
-  "classNr": "13",
-  "fullname": "Mælek Shafi'i",
-  "position": "Full Stack Developer",
-  "assignment": "test.com"
- },{
-  "id": "3",
-  "imageUrl": "/profile.png",
-  "github": "https://github.com/basafilm",
-  "company": "Google",
-  "linkedIn": "https://www.linkedin.com/in/malek-shafi-i-8b874518/?originalSubdomain=dk",
-  "interviewRounds": "120",
-  "classNr": "13",
-  "fullname": "Mælek Shafi'i",
-  "position": "Full Stack Developer",
-  "assignment": "test.com"
- },{
-  "id": "4",
-  "imageUrl": "/profile.png",
-  "github": "https://github.com/basafilm",
-  "company": "Google",
-  "linkedIn": "https://www.linkedin.com/in/malek-shafi-i-8b874518/?originalSubdomain=dk",
-  "interviewRounds": "120",
-  "classNr": "13",
-  "fullname": "Mælek Shafi'i",
-  "position": "Full Stack Developer",
-  "assignment": "test.com"
- }]
+const dummyData = [
+  {
+    id: "1",
+    imageUrl: "/profile.png",
+    github: "https://github.com/basafilm",
+    company: "Google",
+    linkedIn:
+      "https://www.linkedin.com/in/malek-shafi-i-8b874518/?originalSubdomain=dk",
+    interviewRounds: "120",
+    classNr: "13",
+    fullname: "Mælek Shafi'i",
+    position: "Full Stack Developer",
+    assignment: "test.com",
+  },
+  {
+    id: "2",
+    imageUrl: "/profile.png",
+    github: "https://github.com/basafilm",
+    company: "Google",
+    linkedIn:
+      "https://www.linkedin.com/in/malek-shafi-i-8b874518/?originalSubdomain=dk",
+    interviewRounds: "120",
+    classNr: "13",
+    fullname: "Mælek Shafi'i",
+    position: "Full Stack Developer",
+    assignment: "test.com",
+  },
+  {
+    id: "3",
+    imageUrl: "/profile.png",
+    github: "https://github.com/basafilm",
+    company: "Google",
+    linkedIn:
+      "https://www.linkedin.com/in/malek-shafi-i-8b874518/?originalSubdomain=dk",
+    interviewRounds: "120",
+    classNr: "13",
+    fullname: "Mælek Shafi'i",
+    position: "Full Stack Developer",
+    assignment: "test.com",
+  },
+  {
+    id: "4",
+    imageUrl: "/profile.png",
+    github: "https://github.com/basafilm",
+    company: "Google",
+    linkedIn:
+      "https://www.linkedin.com/in/malek-shafi-i-8b874518/?originalSubdomain=dk",
+    interviewRounds: "120",
+    classNr: "13",
+    fullname: "Mælek Shafi'i",
+    position: "Full Stack Developer",
+    assignment: "test.com",
+  },
+];
 export async function getStaticProps(context) {
   // const res = await fetch(baseURL);
   // const data = await res.json() ;
-  const data = dummyData ;
+  const data = dummyData;
 
   if (!data) {
     return {
