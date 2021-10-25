@@ -2,7 +2,6 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Main from "../components/Main";
 import Link from "next/link";
-import Image from "next/image";
 export const baseURL = process.env.AWS_BASE_URL;
 
 export default function Home({ data }) {
@@ -50,19 +49,17 @@ export default function Home({ data }) {
                     Class Number: <strong>{member.classNr}</strong>
                   </p>
                 </div>
-                <div className="w-2/4 flex justify-around p-10">
+                <div className="w-2/4 flex justify-around p-10 float-right">
                   <Link className="w-full" href={member.linkedIn}>
-                    <Image
-                      width="20"
-                      height="20"
+                    <img
+                     className="w-1/6 h-auto  md:rounded-none mx-auto"
                       src="/linkedIn.png"
                       alt={member.linkedIn}
                     />
                   </Link>
                   <Link className="w-full" href={member.github}>
-                    <Image
-                      width="20"
-                      height="20"
+                    <img
+                     className="w-1/6 h-auto  md:rounded-none mx-auto"
                       src="/github.png"
                       alt={member.github}
                     />
@@ -74,16 +71,15 @@ export default function Home({ data }) {
       </div>
       <dv className="w-full h-auto flex flex-row justify-between p-10">
         <div className="w-2/6">
-          <Image
-            width="150"
-            height="100"
+          <img
+         className="w-full h-auto  md:rounded-none mx-auto"
             src="/story.png"
             alt=""
-            layout="responsive"
+          
           />
         </div>
         <div className="w-3/4 h-auto pl-10">
-          <p className="text-4xl text-indigo-900 ">
+          <p className="text-2xl text-indigo-900 ">
             Did you find a job and you want to share the good news with the
             community?{" "}
           </p>
@@ -106,7 +102,7 @@ export default function Home({ data }) {
 
 const dummyData = [{
   "id": "1",
-  "imageUrl": "http://placehold.it/120x120&text=image1",
+  "imageUrl": "/profile.png",
   "github": "https://github.com/basafilm",
   "company": "Google",
   "linkedIn": "https://www.linkedin.com/in/malek-shafi-i-8b874518/?originalSubdomain=dk",
@@ -118,7 +114,7 @@ const dummyData = [{
  },
  {
   "id": "2",
-  "imageUrl": "http://placehold.it/120x120&text=image1",
+  "imageUrl": "/profile.png",
   "github": "https://github.com/basafilm",
   "company": "Google",
   "linkedIn": "https://www.linkedin.com/in/malek-shafi-i-8b874518/?originalSubdomain=dk",
@@ -129,7 +125,7 @@ const dummyData = [{
   "assignment": "test.com"
  },{
   "id": "3",
-  "imageUrl": "http://placehold.it/120x120&text=image1",
+  "imageUrl": "/profile.png",
   "github": "https://github.com/basafilm",
   "company": "Google",
   "linkedIn": "https://www.linkedin.com/in/malek-shafi-i-8b874518/?originalSubdomain=dk",
@@ -140,7 +136,7 @@ const dummyData = [{
   "assignment": "test.com"
  },{
   "id": "4",
-  "imageUrl": "http://placehold.it/120x120&text=image1",
+  "imageUrl": "/profile.png",
   "github": "https://github.com/basafilm",
   "company": "Google",
   "linkedIn": "https://www.linkedin.com/in/malek-shafi-i-8b874518/?originalSubdomain=dk",
@@ -151,9 +147,9 @@ const dummyData = [{
   "assignment": "test.com"
  }]
 export async function getStaticProps(context) {
-  const res = await fetch(baseURL);
+  // const res = await fetch(baseURL);
   // const data = await res.json() ;
-  const data = await dummyData ;
+  const data = dummyData ;
 
   if (!data) {
     return {
