@@ -1,32 +1,28 @@
 import Link from "next/link";
 
+
 export default function Footer() {
   return (
-    <div className="w-full h-12 pt-3 bg-indigo-900">
-      <ul className="flex flex-row justify-around float-right pr-5 text-white ">
+    <div className="w-full h-12 pt-3 bg-indigo-900 flex flex-row ">
+      <div className="w-3/4 flex flex-row text-white text-xs "><p  className="pl-10" >Foreningen HackYourFuture | CVR: 38533193 | {""}</p>
+      <Link  href="mailto:cph@hackyourfuture.dk"> cph@hackyourfuture.dk</Link></div>
+      <ul className=" w-1/4 flex flex-row justify-around  pr-5 text-white ">
         <li className="w-full mx-5 ">
-          <Link href="https://www.hackyourfuture.dk/apply">
-            <a className="whitespace-nowrap">APPLY</a>
+          <Link href="https://www.linkedin.com/school/hackyourfuture-copenhagen/">
+          <img
+       className="w-1/6 h-auto  md:rounded-none mx-auto"
+            src="/linkedIn.png"
+            alt="hyf linkedIn logo"
+          />
           </Link>
         </li>
-        <li className="w-full mx-5">
-          <Link href="https://www.hackyourfuture.dk/volunteer">
-            <a className="whitespace-nowrap">VOLUNTEER</a>
-          </Link>
-        </li>
-        <li className="w-full mx-5">
-          <Link href="https://www.hackyourfuture.dk/about">
-            <a className="whitespace-nowrap">ABOUT</a>
-          </Link>
-        </li>
-        <li className="w-full mx-5">
-          <Link href="https://www.hackyourfuture.dk/hire">
-            <a className="whitespace-nowrap">HIRE</a>
-          </Link>
-        </li>
-        <li className="w-full mx-10 bg-indigo-900">
-          <Link href="https://www.hackyourfuture.dk/donate">
-            <a className="whitespace-nowrap text-white p-10">SUPPORT</a>
+        <li className="w-1/6 mx-5">
+          <Link href="https://github.com/hackyourfuture-cph">
+          <img
+       className="w-full h-auto  md:rounded-none mx-auto"
+            src="/github.png"
+            alt="hyf github logo"
+          />
           </Link>
         </li>
       </ul>
