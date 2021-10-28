@@ -24,10 +24,10 @@ const Form = () => {
 
   return (
     <div>
-      <div class="mt-10 sm:mt-0">
-        <div class="md:grid md:grid-cols-3 md:gap-6">
-          <div class="md:col-span-1">
-            <div class="px-4 sm:px-0">
+      <div className="mt-10 sm:mt-0">
+        <div className="md:grid md:grid-cols-3 md:gap-6">
+          <div className="md:col-span-1">
+            <div className="px-4 sm:px-0">
               <img
                 className="shadow-xl w-full max-w-full h-auto align-left border-none"
                 src="/formImage.jpg"
@@ -36,7 +36,7 @@ const Form = () => {
               />
             </div>
           </div>
-          <div class="mt-5 md:mt-0 md:col-span-2">
+          <div className="mt-5 md:mt-0 md:col-span-2">
             <h1 className="font-bold mb-6 text-base md:text-lg text-blue-800">
               Fill out the form:
             </h1>
@@ -45,13 +45,13 @@ const Form = () => {
                 submitForm(data);
               })}
             >
-              <div class="shadow overflow-hidden sm:rounded-md">
-                <div class="px-4 py-5 bg-gray-50 sm:p-6">
-                  <div class="grid grid-cols-6 gap-6">
-                    <div class="col-span-6 sm:col-span-3">
+              <div className="shadow overflow-hidden sm:rounded-md">
+                <div className="px-4 py-5 bg-gray-50 sm:p-6">
+                  <div className="grid grid-cols-6 gap-6">
+                    <div className="col-span-6 sm:col-span-3">
                       <label
-                        for="first-name"
-                        class="block text-sm font-medium text-gray-700"
+                        htmlFor="firstName"
+                        className="block text-sm font-medium text-gray-700"
                       >
                         Full Name*
                       </label>
@@ -62,7 +62,7 @@ const Form = () => {
                         type="text"
                         name="fullName"
                         id="fullName"
-                        autocomplete="given-name"
+                        autoComplete="given-name"
                         className="placeholder-gray-500 pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                       />
                       {errors.fullName && (
@@ -72,10 +72,10 @@ const Form = () => {
                       )}
                     </div>
 
-                    <div class="col-span-6 sm:col-span-3">
+                    <div className="col-span-6 sm:col-span-3">
                       <label
-                        for="classNr"
-                        class="block text-sm font-medium text-gray-700"
+                        htmlFor="classNr"
+                        className="block text-sm font-medium text-gray-700"
                       >
                         Class nr*
                       </label>
@@ -84,7 +84,7 @@ const Form = () => {
                         type="number"
                         name="classNr"
                         id="classNr"
-                        autocomplete="classNr"
+                        autoComplete="classNr"
                         className="placeholder-gray-500 pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                       />
                       {errors.classNr && (
@@ -94,10 +94,10 @@ const Form = () => {
                       )}
                     </div>
 
-                    <div class="col-span-6 sm:col-span-3">
+                    <div className="col-span-6 sm:col-span-3">
                       <label
-                        for="position"
-                        class="block text-sm font-medium text-gray-700"
+                        htmlFor="position"
+                        className="block text-sm font-medium text-gray-700"
                       >
                         Position*
                       </label>
@@ -108,7 +108,7 @@ const Form = () => {
                         type="text"
                         name="position"
                         id="position"
-                        autocomplete="position"
+                        autoComplete="position"
                         className="placeholder-gray-500 pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                       />
                       {errors.position && (
@@ -118,10 +118,10 @@ const Form = () => {
                       )}
                     </div>
 
-                    <div class="col-span-6 sm:col-span-3">
+                    <div className="col-span-6 sm:col-span-3">
                       <label
-                        for="company"
-                        class="block text-sm font-medium text-gray-700"
+                        htmlFor="company"
+                        className="block text-sm font-medium text-gray-700"
                       >
                         Company*
                       </label>
@@ -130,7 +130,7 @@ const Form = () => {
                         type="text"
                         name="company"
                         id="company"
-                        autocomplete="company"
+                        autoComplete="company"
                         className="placeholder-gray-500 pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                       />
                       {errors.company && (
@@ -141,10 +141,10 @@ const Form = () => {
                     </div>
                   </div>
 
-                  <div class="col-span-6 sm:col-span-3">
+                  <div className="col-span-6 sm:col-span-3">
                     <label
-                      for="aboutJob"
-                      class="block text-sm font-medium text-gray-700"
+                      htmlFor="aboutJob"
+                      className="block text-sm font-medium text-gray-700"
                     >
                       <p className="mt-5">
                         {" "}
@@ -159,7 +159,7 @@ const Form = () => {
                       type="text"
                       name="aboutJob"
                       id="aboutJob"
-                      autocomplete="aboutJob"
+                      autoComplete="aboutJob"
                       className="placeholder-gray-500 pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                     />
                     {errors.aboutJob && (
@@ -169,7 +169,7 @@ const Form = () => {
                     )}
                   </div>
 
-                  <div class="col-span-6 sm:col-span-3">
+                  <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="linkedin"
                       className="block text-sm mt-5 font-medium text-gray-700"
@@ -190,7 +190,7 @@ const Form = () => {
                     )}
                   </div>
 
-                  <div class="col-span-6 sm:col-span-3">
+                  <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="github"
                       className="block text-sm mt-5 font-medium text-gray-700"
@@ -211,10 +211,10 @@ const Form = () => {
                     )}
                   </div>
 
-                  <div class="col-span-6 sm:col-span-3">
+                  <div className="col-span-6 sm:col-span-3">
                     <label
-                      for="interviewRounds"
-                      class="block text-sm mt-5 font-medium text-gray-700"
+                      htmFor="interviewRounds"
+                      className="block text-sm mt-5 font-medium text-gray-700"
                     >
                       How many rounds of interviews you had?*
                     </label>
@@ -225,7 +225,7 @@ const Form = () => {
                       type="number"
                       name="interviewRounds"
                       id="interviewRounds"
-                      autocomplete="interviewRounds"
+                      autoComplete="interviewRounds"
                       className="placeholder-gray-500 pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                     />
                     {errors.interviewRounds && (
@@ -235,7 +235,7 @@ const Form = () => {
                     )}
                   </div>
 
-                  <div class="col-span-6 sm:col-span-3">
+                  <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="assignment"
                       className="block text-sm mt-5 font-medium text-gray-700"
@@ -271,7 +271,7 @@ const Form = () => {
                     )}
                   </div>
 
-                  <div class="col-span-6 sm:col-span-3">
+                  <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="comment"
                       className="block text-sm mt-5 font-medium text-gray-700"
