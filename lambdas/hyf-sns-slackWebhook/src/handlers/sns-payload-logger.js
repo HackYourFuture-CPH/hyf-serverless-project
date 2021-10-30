@@ -3,7 +3,7 @@
  */
 const axios = require("axios").default;
 const aws = require("aws-sdk");
-const db = new aws.DynamoDB({ region: "us-east-1", maxRetries: 1 });
+const db = new aws.DynamoDB();
 
 const tableName = process.env.PERSONS_TABLE;
 
