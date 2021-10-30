@@ -15,6 +15,8 @@ Transform:
 Parameters:
   SlackWebhookUrl:
     Type: String
+  PersonsTable:
+    Type: String
 # Resources declares the AWS resources that you want to include in the stack
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
 Resources:
@@ -34,6 +36,7 @@ Resources:
       Environment:
         Variables:
           SLACK_URL: !Ref SlackWebhookUrl
+          PERSONS_TABLE: !Ref PersonsTable
       # This property associates this Lambda function with the SNS topic defined above, so that whenever the topic
       # receives a message, the Lambda function is invoked
       Events:

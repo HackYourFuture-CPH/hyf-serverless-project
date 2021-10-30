@@ -1,30 +1,23 @@
 /**
  * A Lambda function that logs the payload received from SNS.
  */
-require("dotenv").config();
-const fetch = (...args) =>
-  import("node-fetch").then(({ default: fetch }) => fetch(...args));
-
+const axios = require("axios").default;
 const aws = require("aws-sdk");
-const db = new aws.DynamoDB({
-  region: "us-east-1",
-  maxRetries: 1,
-});
+const db = new aws.DynamoDB({ region: "us-east-1", maxRetries: 1 });
 
 const tableName = process.env.PERSONS_TABLE;
 
 exports.snsPayloadLoggerHandler = async (event, context) => {
-  console.log("Event " + JSON.stringify(event));
   var params = {
     TableName: tableName,
-    Key: { id: { S: event.Records[0].Sns.Message } }, //id from sns event.Records[0].Sns.Message
+    Key: { id: { S: event.Records[0].Sns.Message } }, 
   };
 
   const result = await db.getItem(params).promise();
 
   const roundsText = result["Item"].interviewRounds.S > 1 ? "rounds" : "round";
 
-  const data = {
+  const payload = {
     username: "HYF Alumni Hired",
     icon_emoji: ":hyf-new:",
     blocks: [
@@ -37,7 +30,7 @@ exports.snsPayloadLoggerHandler = async (event, context) => {
       },
       {
         type: "image",
-        image_url: result["Item"].imageUrl.S,
+        image_url: "https://www.copahost.com/blog/wp-content/uploads/2019/07/imgsize2.png", //result["Item"].imageUrl.S,
         alt_text: result["Item"].fullname.S,
       },
     ],
@@ -72,12 +65,19 @@ exports.snsPayloadLoggerHandler = async (event, context) => {
 
   const slackURL = process.env.SLACK_URL;
 
-  await fetch(slackURL, {
-    method: "POST",
+  await axios({
+    method: "post",
+    url: slackURL,
+
+    data: payload,
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: JSON.stringify(data),
   })
-    .then((res) => res.json())
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err));
+    .then(function (response) {
+      //handle success
+      console.info(response);
+    })
+    .catch(function (error) {
+      //handle error
+      console.error(`Error posting message to Slack API: ${error}`);
+    });
 };
