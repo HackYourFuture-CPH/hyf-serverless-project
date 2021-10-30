@@ -51,22 +51,22 @@ export default function Home({ data }) {
                   </p>
                 </div>
                 <div className="w-2/4 flex justify-around p-10">
-                  <Link className="w-full" href={member.linkedIn}>
+                  {member.linkedIn && <Link className="w-full" href={member.linkedIn}>
                     <Image
                       width="20"
                       height="20"
                       src="/linkedIn.png"
                       alt={member.linkedIn}
                     />
-                  </Link>
-                  <Link className="w-full" href={member.github}>
+                  </Link>}
+                  {member.github && <Link className="w-full" href={member.github}>
                     <Image
                       width="20"
                       height="20"
                       src="/github.png"
                       alt={member.github}
                     />
-                  </Link>
+                  </Link>}
                 </div>
               </div>
             );
@@ -151,9 +151,11 @@ const dummyData = [{
   "assignment": "test.com"
  }]
 export async function getStaticProps(context) {
-  const res = await fetch(baseURL);
+  const res = await fetch('https://o3fp0fun12.execute-api.us-east-1.amazonaws.com/Prod/');
   // const data = await res.json() ;
-  const data = await dummyData ;
+  const data = await res.json();
+   console.log(data)
+  
 
   if (!data) {
     return {
