@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function Header() {
   return (
@@ -11,12 +10,10 @@ export default function Header() {
       </Head>
       <div className=" w-full h-12 flex flex-row ">
         <div className="w-14 h-12 left-5 absolute z-10">
-          <Image
+          <img
             src="/logo-round.svg"
             alt="hyf-logo"
-            width="100"
-            height="80"
-            layout="fixed"
+            className="w-full h-auto  md:rounded-none mx-auto"
           />
         </div>
         <div className="w-full pt-3">
