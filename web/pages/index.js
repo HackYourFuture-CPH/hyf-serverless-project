@@ -51,22 +51,22 @@ export default function Home({ data }) {
                   </p>
                 </div>
                 <div className="w-2/4 flex justify-around p-10">
-                  {/* <Link className="w-full" href={member.linkedIn}>
+                  {member.linkedIn && <Link className="w-full" href={member.linkedIn}>
                     <Image
                       width="20"
                       height="20"
                       src="/linkedIn.png"
                       alt={member.linkedIn}
                     />
-                  </Link>
-                  <Link className="w-full" href={member.github}>
+                  </Link>}
+                  {member.github && <Link className="w-full" href={member.github}>
                     <Image
                       width="20"
                       height="20"
                       src="/github.png"
                       alt={member.github}
                     />
-                  </Link> */}
+                  </Link>}
                 </div>
               </div>
             );
