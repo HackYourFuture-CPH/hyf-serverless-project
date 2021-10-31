@@ -1,51 +1,70 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import usePersons from "../hooks/usePersons";
+import Link from "next/link";
+import uploadImage from "../hooks/usePicture";
 
-const Form = () => {
+export default function Form() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { postPerson, success, error } = usePersons();
+  const [imageUrl, setImageUrl] = useState("");
 
-  const submitForm = (formData) => {
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    };
-    fetch(
-      "https://o3fp0fun12.execute-api.us-east-1.amazonaws.com/Prod/",
-      requestOptions
-    )
-      .then((res) => res.json())
-      .then((res) => console.log(res));
+  const uploadFile = async (event) => {
+    const formData = new FormData();
+    formData.append("formFile", event.target.files[0]);
+    
+    const imageUrlUploaded = await uploadImage(formData);
+    setImageUrl(imageUrlUploaded);
   };
 
-  return (
-    <div class="flex min-h-screen bg-gray-50 font-mono">
-      <img
-        className="shadow-xl h-auto align-left border-none"
-        src="/formImage.jpeg"
-        alt="form/img"
-        width="512"
-      />
-
+  if (success) {
+    return (
+      <div className="w-full md:w-3/5 px-6 py-10 bg-gray-100 flex flex-col justify-center">
+        <h1 className="font-bold mb-6 text-3xl text-blue-800">Thank you!</h1>
+        <h2 className="mb-6 text-xl text-gray-900">
+          The form was successfully submitted.
+        </h2>
+        <Link href="/">
+          <span className="text-xl text-gray-900 underline">
+            Go to homepage
+          </span>
+        </Link>
+      </div>
+    );
+  } else if (error) {
+    return (
+      <div className="w-full md:w-3/5 px-6 py-10 bg-gray-100 flex flex-col justify-center">
+        <h1 className="font-bold mb-6 text-3xl text-red-600">
+          An error happened
+        </h1>
+        <h2 className="mb-6 text-xl text-red-500">{error}</h2>
+        <Link href="/share-story">
+          <span className="text-xl text-gray-900 underline">Try again</span>
+        </Link>
+      </div>
+    );
+  } else {
+    return (
       <form
-        className="w-screen"
+        className="w-full md:w-3/5 pt-12"
         onSubmit={handleSubmit((data) => {
-          submitForm(data);
+          const dataWithImage = { imageUrl, ...data };
+          postPerson(dataWithImage);
         })}
       >
-        <div className="px-4 py-5 bg-gray-50 lg:p-6">
-          <h1 className="font-bold mb-6 text-base md:text-lg text-blue-800">
+        <div className="px-4 py-5 bg-gray-100 lg:p-6">
+          <h1 className="font-bold mb-6 text-xl text-blue-800">
             Fill out the form:
           </h1>
           <div className="grid grid-cols-6 gap-6 w-full">
             <div className="col-span-6 sm:col-span-3 w-full">
               <label
                 htmlFor="firstName"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-500"
               >
                 Full Name*
               </label>
@@ -65,11 +84,10 @@ const Form = () => {
                 </p>
               )}
             </div>
-
             <div className="col-span-6 sm:col-span-3">
               <label
                 htmlFor="classNr"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-500"
               >
                 Class nr*
               </label>
@@ -87,11 +105,10 @@ const Form = () => {
                 <p className="text-red-500 text-xs">{errors.classNr.message}</p>
               )}
             </div>
-
             <div className="col-span-6 sm:col-span-3">
               <label
                 htmlFor="position"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-500"
               >
                 Position*
               </label>
@@ -111,11 +128,10 @@ const Form = () => {
                 </p>
               )}
             </div>
-
             <div className="col-span-6 sm:col-span-3">
               <label
                 htmlFor="company"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-500"
               >
                 Company*
               </label>
@@ -134,14 +150,13 @@ const Form = () => {
               )}
             </div>
           </div>
-
           <div className="col-span-6 sm:col-span-3">
             <label
               htmlFor="aboutJob"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-500"
             >
-              <p className="mt-5"> How did you find about the job position?</p>
-              <p>(referral, job post on linkedin, etc)*</p>
+              <p className="mt-5"> How did you find about the job position?*</p>
+              <p>(referral, job post on LinkedIn, etc)</p>
             </label>
             <input
               {...register("aboutJob", {
@@ -157,13 +172,12 @@ const Form = () => {
               <p className="text-red-500 text-xs">{errors.aboutJob.message}</p>
             )}
           </div>
-
           <div className="col-span-6 sm:col-span-3">
             <label
               htmlFor="linkedin"
-              className="block text-sm mt-5 font-medium text-gray-700"
+              className="block text-sm mt-5 font-medium text-gray-500"
             >
-              linkedin Url
+              LinkedIn url*
             </label>
             <input
               type="text"
@@ -178,13 +192,12 @@ const Form = () => {
               <p className="text-red-500 text-xs">{errors.linkedin.message}</p>
             )}
           </div>
-
           <div className="col-span-6 sm:col-span-3">
             <label
               htmlFor="github"
-              className="block text-sm mt-5 font-medium text-gray-700"
+              className="block text-sm mt-5 font-medium text-gray-500"
             >
-              github Url
+              Github url*
             </label>
             <input
               type="text"
@@ -197,11 +210,10 @@ const Form = () => {
               <p className="text-red-500 text-xs">{errors.github.message}</p>
             )}
           </div>
-
           <div className="col-span-6 sm:col-span-3">
             <label
-              htmFor="interviewRounds"
-              className="block text-sm mt-5 font-medium text-gray-700"
+              htmlFor="interviewRounds"
+              className="block text-sm mt-5 font-medium text-gray-500"
             >
               How many rounds of interviews you had?*
             </label>
@@ -221,11 +233,10 @@ const Form = () => {
               </p>
             )}
           </div>
-
           <div className="col-span-6 sm:col-span-3">
             <label
               htmlFor="assignment"
-              className="block text-sm mt-5 font-medium text-gray-700"
+              className="block text-sm my-5 font-medium text-gray-500"
             >
               Did you have a coding assignment?*
             </label>
@@ -257,13 +268,12 @@ const Form = () => {
               </p>
             )}
           </div>
-
           <div className="col-span-6 sm:col-span-3">
             <label
               htmlFor="comment"
-              className="block text-sm mt-5 font-medium text-gray-700"
+              className="block text-sm mt-5 font-medium text-gray-500"
             >
-              Comment
+              Comment*
             </label>
             <textarea
               {...register("comment", { required: "Required field" })}
@@ -275,33 +285,39 @@ const Form = () => {
               <p className="text-red-500 text-xs">{errors.comment.message}</p>
             )}
           </div>
-
           <div className="flex mt-8">
-            <div className="lg shadow-xl bg-black md:w-1/1">
+            <div className="lg shadow-xl bg-black text-white w-full text-white text-sm">
               <div className="m-4">
-                <label className="inline-block mb-2 text-white">
-                  Upload Image(jpg,png,svg,jpeg)
+                <label className="inline-block mb-2">
+                  Upload Image(jpg,png,svg,jpeg)*
                 </label>
                 <br />
-                <input type="file" name="imageUrl" />
+                <input
+                  type="file"
+                  {...register("imageUrl", { required: "Required field" })}
+                  onChange={uploadFile}
+                />
+                {errors.imageUrl && (
+                  <p className="text-red-500 text-xs">
+                    {errors.imageUrl.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>
           <div>
             <button
               type="submit"
-              className="group relative flex justify-center p-4 mt-8 border border-transparent text-sm font-medium text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="group relative flex justify-center py-4 px-8 mt-8 border border-transparent text-sm font-medium text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Submit
             </button>
           </div>
           <div>
-            <p className="mt-3">*required fields</p>
+            <p className="mt-3 text-sm">*required fields</p>
           </div>
         </div>
       </form>
-    </div>
-  );
-};
-
-export default Form;
+    );
+  }
+}

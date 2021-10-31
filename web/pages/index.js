@@ -84,7 +84,7 @@ export default function Home({ data }) {
           </p>
           <div className="max-w-md bg-indigo-900 m-5 p-2">
             {/* link to form page */}
-            <Link href="../Form">
+            <Link href="/share-story">
               <a className="whitespace-nowrap text-white p-10 ">
                 SHARE YOUR STORY
               </a>
