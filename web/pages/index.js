@@ -49,33 +49,17 @@ export default function Home({ data }) {
                     Class Number: <strong>{member.classNr}</strong>
                   </p>
                 </div>
-<<<<<<< HEAD
-                <div className="w-2/4 flex justify-around p-10">
+                <div className="w-2/4 flex justify-around p-10 float-right">
                   {member.linkedIn && <Link className="w-full" href={member.linkedIn}>
-                    <Image
-                      width="20"
-                      height="20"
+                    <img
+                      className="w-1/6 h-auto  md:rounded-none mx-auto"
                       src="/linkedIn.png"
                       alt={member.linkedIn}
                     />
                   </Link>}
                   {member.github && <Link className="w-full" href={member.github}>
-                    <Image
-                      width="20"
-                      height="20"
-=======
-                <div className="w-2/4 flex justify-around p-10 float-right">
-                  <Link className="w-full" href={member.linkedIn}>
                     <img
                       className="w-1/6 h-auto  md:rounded-none mx-auto"
-                      src="/linkedIn.png"
-                      alt={member.linkedIn}
-                    />
-                  </Link>
-                  <Link className="w-full" href={member.github}>
-                    <img
-                      className="w-1/6 h-auto  md:rounded-none mx-auto"
->>>>>>> e67891f778d245c4324869ecc7cfb460e28af21e
                       src="/github.png"
                       alt={member.github}
                     />
@@ -170,17 +154,8 @@ const dummyData = [
   },
 ];
 export async function getStaticProps(context) {
-<<<<<<< HEAD
   const res = await fetch('https://o3fp0fun12.execute-api.us-east-1.amazonaws.com/Prod/');
-  // const data = await res.json() ;
   const data = await res.json();
-   console.log(data)
-  
-=======
-  // const res = await fetch(baseURL);
-  // const data = await res.json() ;
-  const data = dummyData;
->>>>>>> e67891f778d245c4324869ecc7cfb460e28af21e
 
   if (!data) {
     return {
