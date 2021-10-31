@@ -14,10 +14,7 @@ export default function Form() {
   const [imageUrl, setImageUrl] = useState("");
 
   const uploadFile = async (event) => {
-    const formData = new FormData();
-    formData.append("formFile", event.target.files[0]);
-    
-    const imageUrlUploaded = await uploadImage(formData);
+    const imageUrlUploaded = await uploadImage(event.target.files[0]);
     setImageUrl(imageUrlUploaded);
   };
 
@@ -57,7 +54,12 @@ export default function Form() {
         })}
       >
         <div className="px-4 py-5 bg-gray-100 lg:p-6">
+<<<<<<< HEAD:web/components/Form.jsx
           <h1 className="font-bold mb-6 mt-3 text-xl text-blue-800">
+=======
+          <h1 className="font-bold mb-6 text-xl text-blue-800">
+            {imageUrl && <img src={imageUrl} alt="Profile picture" />}
+>>>>>>> 8ac6956 (Create initial solution of image uploading):web/components/Form.js
             Fill out the form:
           </h1>
           <div className="grid grid-cols-6 gap-6 w-full">
