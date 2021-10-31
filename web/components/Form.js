@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import usePersons from "../hooks/usePersons";
 import Link from "next/link";
+import uploadImage from "../hooks/usePicture";
 
 export default function Form() {
   const {
@@ -10,6 +11,15 @@ export default function Form() {
     formState: { errors },
   } = useForm();
   const { postPerson, success, error } = usePersons();
+  const [imageUrl, setImageUrl] = useState("");
+
+  const uploadFile = async (event) => {
+    const formData = new FormData();
+    formData.append("formFile", event.target.files[0]);
+    
+    const imageUrlUploaded = await uploadImage(formData);
+    setImageUrl(imageUrlUploaded);
+  };
 
   if (success) {
     return (
@@ -42,7 +52,8 @@ export default function Form() {
       <form
         className="w-full md:w-3/5 pt-12"
         onSubmit={handleSubmit((data) => {
-          postPerson(data);
+          const dataWithImage = { imageUrl, ...data };
+          postPerson(dataWithImage);
         })}
       >
         <div className="px-4 py-5 bg-gray-100 lg:p-6">
@@ -281,7 +292,16 @@ export default function Form() {
                   Upload Image(jpg,png,svg,jpeg)*
                 </label>
                 <br />
-                <input type="file" name="imageUrl" />
+                <input
+                  type="file"
+                  {...register("imageUrl", { required: "Required field" })}
+                  onChange={uploadFile}
+                />
+                {errors.imageUrl && (
+                  <p className="text-red-500 text-xs">
+                    {errors.imageUrl.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>
