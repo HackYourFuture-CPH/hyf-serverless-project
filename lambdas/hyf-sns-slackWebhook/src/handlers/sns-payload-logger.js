@@ -10,13 +10,14 @@ const tableName = process.env.PERSONS_TABLE;
 exports.snsPayloadLoggerHandler = async (event, context) => {
   var params = {
     TableName: tableName,
-    Key: { id: { S: event.Records[0].Sns.Message } }, 
+    Key: { id: { S: event.Records[0].Sns.Message } },
   };
 
   const result = await db.getItem(params).promise();
 
   const roundsText = result["Item"].interviewRounds.S > 1 ? "rounds" : "round";
-
+  const header = `*${result["Item"].fullname.S}* from class *${result["Item"].classNr.S}* just landed a job after *${result["Item"].interviewRounds.S}* interview ${roundsText}! :clap:`;
+ 
   const payload = {
     username: "HYF Alumni Hired",
     icon_emoji: ":hyf-new:",
@@ -25,12 +26,12 @@ exports.snsPayloadLoggerHandler = async (event, context) => {
         type: "section",
         text: {
           type: "mrkdwn",
-          text: `*${result["Item"].fullname.S}* from class *${result["Item"].classNr.S}* just landed a job after *${result["Item"].interviewRounds.S}* interview ${roundsText}! :clap:`,
+          text: header,
         },
       },
       {
         type: "image",
-        image_url: "https://www.copahost.com/blog/wp-content/uploads/2019/07/imgsize2.png", //result["Item"].imageUrl.S,
+        image_url: result["Item"].imageUrl.S,
         alt_text: result["Item"].fullname.S,
       },
     ],
@@ -68,7 +69,6 @@ exports.snsPayloadLoggerHandler = async (event, context) => {
   await axios({
     method: "post",
     url: slackURL,
-
     data: payload,
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
   })
