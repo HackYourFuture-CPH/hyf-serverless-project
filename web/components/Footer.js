@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 
 export default function Footer() {
@@ -10,19 +9,17 @@ export default function Footer() {
       <ul className=" w-1/4 flex flex-row justify-around  pr-5 text-white ">
         <li className="w-full mx-5 ">
           <Link href="https://www.linkedin.com/school/hackyourfuture-copenhagen/">
-          <Image
-            width="20"
-            height="20"
+          <img
+       className="w-1/6 h-auto  md:rounded-none mx-auto"
             src="/linkedIn.png"
             alt="hyf linkedIn logo"
           />
           </Link>
         </li>
-        <li className="w-full mx-5">
+        <li className="w-1/6 mx-5">
           <Link href="https://github.com/hackyourfuture-cph">
-          <Image
-            width="20"
-            height="20"
+          <img
+       className="w-full h-auto  md:rounded-none mx-auto"
             src="/github.png"
             alt="hyf github logo"
           />
