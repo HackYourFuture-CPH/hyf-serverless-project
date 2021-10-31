@@ -1,6 +1,6 @@
 const dynamodb = require("aws-sdk/clients/dynamodb");
 const docClient = new dynamodb.DocumentClient();
-const aws = require("aws-sdk"); 
+const aws = require("aws-sdk");
 
 const tableName = 'HYFAlumnis-PersonsTable-ADUBDS3KB7RW';
 exports.putPersonsHandler = async (event, context) => {
@@ -50,7 +50,8 @@ exports.putPersonsHandler = async (event, context) => {
   const paramsSNS = {
     Message: `ID: ${body.id}, Name: ${body.fullname} got placed in ${body.company}`,
     Subject: "New job position received",
-    TopicArn: "arn:aws:sns:us-east-1:699804860351:Alumni_Got_Employed", //topic arn goes here
+    TopicArn:
+      "arn:aws:sns:us-east-1:699804860351:sns-slack-handler-SimpleTopic-ZYHKZQJSSR3V", //topic arn goes here
   };
   sns.publish(paramsSNS, context.done);
 
