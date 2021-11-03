@@ -1,5 +1,15 @@
 {
-  "TopicArn": "arn:aws:sns:us-west-2:123456789012:SimpleTopic",
-  "Message": "This is a notification from SNS",
-  "Subject": "SNS Notification"
+  "Records": [
+    {
+      "EventSource": "aws:sns",
+      "EventVersion": "1.0",
+      "EventSubscriptionArn": "arn:aws:sns:us-east-1:699804860351:patrick-SimpleTopic-1VR46BKXKUONZ:c05afa70-e839-4f87-8e91-ae93a2207fce",
+      "Sns":  {
+        "TopicArn": "arn:aws:sns:us-west-2:123456789012:SimpleTopic",
+        "Message": "3",
+        "Subject": "SNS Notification"
+      }
+      
+    }
+  ]
 }
