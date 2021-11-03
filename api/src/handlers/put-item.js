@@ -48,7 +48,7 @@ exports.putPersonsHandler = async (event, context) => {
   // after results in put
   const sns = new aws.SNS();
   const paramsSNS = {
-    Message: `ID: ${body.id}, Name: ${body.fullname} got placed in ${body.company}`,
+    Message: `${body.id}`,
     Subject: "New job position received",
     TargetArn: "arn:aws:sns:us-east-1:699804860351:sns-slack-handler-SimpleTopic-ZYHKZQJSSR3V"
   };
