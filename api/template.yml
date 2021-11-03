@@ -81,6 +81,27 @@ Resources:
             Path: /
             Method: POST
             RestApiId: !Ref MyApi
+  deleteByIdFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/delete-by-id.deleteByIdHandler
+      Runtime: nodejs14.x
+      MemorySize: 128
+      Timeout: 100
+      Description: A simple example includes a HTTP delete method to delete one item by id from a DynamoDB table.
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref PersonsTable
+      Environment:
+        Variables:
+          personsTable: !Ref PersonsTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /{id}
+            Method: DELETE
+            RestApiId: !Ref MyApi
   PersonsTable:
     Type: AWS::Serverless::SimpleTable
     Name: PersonsTable
