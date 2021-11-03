@@ -69,18 +69,18 @@ export default function Form() {
                 Full Name*
               </label>
               <input
-                {...register("fullName", {
+                {...register("fullname", {
                   required: "Required field",
                 })}
                 type="text"
-                name="fullName"
-                id="fullName"
+                name="fullname"
+                id="fullname"
                 autoComplete="given-name"
                 className="placeholder-gray-500 pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
               />
-              {errors.fullName && (
+              {errors.fullname && (
                 <p className="text-red-500 text-xs">
-                  {errors.fullName.message}
+                  {errors.fullname.message}
                 </p>
               )}
             </div>
