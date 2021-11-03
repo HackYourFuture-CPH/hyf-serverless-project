@@ -8,6 +8,7 @@ const db = new aws.DynamoDB();
 const tableName = process.env.PERSONS_TABLE;
 
 exports.snsPayloadLoggerHandler = async (event, context) => {
+
   var params = {
     TableName: tableName,
     Key: { id: { S: event.Records[0].Sns.Message } },
@@ -80,4 +81,5 @@ exports.snsPayloadLoggerHandler = async (event, context) => {
       //handle error
       console.error(`Error posting message to Slack API: ${error}`);
     });
+
 };
