@@ -57,7 +57,7 @@ exports.snsPayloadLoggerHandler = async (event, context) => {
           },
           {
             title: "Comment:",
-            value: "Comment goes here", //result["Item"].comment.S,
+            value: result["Item"].comment.S,
             short: false,
           },
         ],
