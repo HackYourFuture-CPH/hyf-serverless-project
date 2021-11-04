@@ -33,13 +33,13 @@ export default function Header() {
               </Link>
             </li>
             <li className="w-full mr-5">
-              <Link href="https://www.hackyourfuture.dk/hire">
+              <Link href="/share-story">
                 <a className="whitespace-nowrap">Share your story</a>
               </Link>
             </li>
             <li className="w-full mr-5">
               <Link href="https://www.hackyourfuture.dk/donate">
-                <a className="whitespace-nowrap text-white px-5 py-3 inline-block bg-indigo-900">Support</a>
+                <a className="whitespace-nowrap text-white px-5 py-3 inline-block bg-blue-900">Support</a>
               </Link>
             </li>
           </ul>

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <div className="w-full bg-indigo-900 flex flex-col md:flex-row">
+    <div className="w-full bg-blue-900 flex flex-col md:flex-row">
       <div className="w-full md:w-3/4 flex flex-col md:flex-row text-white text-sm p-5 items-center">
         <p className="mr-2">Foreningen HackYourFuture | CVR: 38533193 |</p>
         <Link href="mailto:cph@hackyourfuture.dk">cph@hackyourfuture.dk</Link>

@@ -23,14 +23,14 @@ export default function Home({ data }) {
           alt=""
         />
         <div className="w-3/5">
-          <p className="text-2xl md:text-4xl text-indigo-900 p-4 md:p-10 leading-8">
+          <p className="text-2xl md:text-4xl text-blue-900 p-4 md:p-10 leading-8">
             Did you find a job and you want to share the good news with the
             community?{" "}
           </p>
           <div className="ml-4 md:mx-10 mb-4 md:mb-10">
             {/* link to form page */}
             <Link href="/share-story">
-              <a className="whitespace-nowrap text-white bg-indigo-900 py-4 px-5 inline-block text-sm md:text-lg">
+              <a className="whitespace-nowrap text-white bg-blue-900 py-4 px-5 inline-block text-sm md:text-lg hover:bg-blue-800">
                 SHARE YOUR STORY
               </a>
             </Link>

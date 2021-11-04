@@ -57,7 +57,7 @@ export default function Form() {
         })}
       >
         <div className="px-4 py-5 bg-gray-100 lg:p-6">
-          <h1 className="font-bold mb-6 text-xl text-blue-800">
+          <h1 className="font-bold mb-6 mt-3 text-xl text-blue-800">
             Fill out the form:
           </h1>
           <div className="grid grid-cols-6 gap-6 w-full">
@@ -308,7 +308,7 @@ export default function Form() {
           <div>
             <button
               type="submit"
-              className="group relative flex justify-center py-4 px-8 mt-8 border border-transparent text-sm font-medium text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="group relative flex justify-center py-4 px-8 mt-8 border border-transparent text-sm font-medium text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 uppercase"
             >
               Submit
             </button>

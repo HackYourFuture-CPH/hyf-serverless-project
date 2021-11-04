@@ -15,11 +15,11 @@ export default function Card(person) {
       />
       <div className="px-6 py-4 text-gray-700 text-xl">
         <div className="font-bold mb-2 w-full text-center">
-          <h2 className="text-3xl text-indigo-900">{member.fullname}</h2>
-          <p className="text-2xl text-indigo-900">
+          <h2 className="text-3xl text-blue-900">{member.fullname}</h2>
+          <p className="text-2xl text-blue-900">
             <strong>{member.position}</strong>
           </p>
-          <p className="text-2xl text-indigo-900 uppercase">
+          <p className="text-2xl text-blue-900 uppercase">
             <strong>{member.company}</strong>
           </p>
           <p className="text-2xl">
