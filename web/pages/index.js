@@ -16,7 +16,7 @@ export default function Home({ data }) {
             return <Card member={person} />;
           })}
       </div>
-      <div className="w-full flex flex-row justify-between mt-10 bg-gray-200">
+      <div className="w-full flex flex-row justify-between mt-5 bg-gray-200">
         <img
           className="w-2/5 object-cover object-center"
           src="/story.png"
