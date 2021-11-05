@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import usePersons from "../hooks/usePersons";
 import Link from "next/link";
-import uploadImage from "../hooks/usePicture";
+//import uploadImage from "../hooks/usePicture";
 import axios from "axios";
 
 export default function Form() {

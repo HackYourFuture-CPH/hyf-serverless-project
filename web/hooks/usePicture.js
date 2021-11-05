@@ -1,6 +1,6 @@
 import axios from "axios";
 
-//TODO: Switch to correct API
+//todo: Switch to correct API
 const baseUrl = "https://45ehg1xwbi.execute-api.us-east-1.amazonaws.com";
 
 const createImageFromFile = (e) => {
