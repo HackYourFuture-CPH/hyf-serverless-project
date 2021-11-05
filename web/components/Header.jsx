@@ -10,10 +10,10 @@ export default function Header() {
       </Head>
       <div className="w-full flex flex-row items-center justify-end">
         <div className="left-5 absolute z-10 w-24 top-5">
-          <img
+          <a href="/"><img
             src="/logo-round.svg"
             alt="hyf-logo"
-          />
+          /></a>
         </div>
         <div className="py-4 uppercase">
           <ul className="flex flex-col md:flex-row justify-end items-center">
