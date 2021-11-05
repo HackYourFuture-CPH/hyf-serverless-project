@@ -2,7 +2,7 @@ const dynamodb = require("aws-sdk/clients/dynamodb");
 const docClient = new dynamodb.DocumentClient();
 const aws = require("aws-sdk");
 
-const tableName = 'HYFAlumnis-PersonsTable-ADUBDS3KB7RW';
+const tableName = "HYFAlumnis-PersonsTable-ADUBDS3KB7RW";
 exports.putPersonsHandler = async (event, context) => {
   if (event.httpMethod !== "POST") {
     throw new Error(
@@ -26,11 +26,9 @@ exports.putPersonsHandler = async (event, context) => {
       linkedIn: body.linkedIn,
       github: body.github,
       comment: body.comment,
-      imageUrl: "?",
+      imageUrl: body.imageUrl,
     },
   };
-
-
 
   const result = await docClient.put(params).promise();
 
@@ -50,10 +48,11 @@ exports.putPersonsHandler = async (event, context) => {
   const paramsSNS = {
     Message: `${body.id}`,
     Subject: "New job position received",
-    TargetArn: "arn:aws:sns:us-east-1:699804860351:sns-slack-handler-SimpleTopic-ZYHKZQJSSR3V"
+    TargetArn:
+      "arn:aws:sns:us-east-1:699804860351:sns-slack-handler-SimpleTopic-ZYHKZQJSSR3V",
   };
 
-  await sns.publish(paramsSNS).promise()
+  await sns.publish(paramsSNS).promise();
 
   console.info(
     `response from: ${event.path} statusCode: ${response.statusCode} body: ${response.body}`
