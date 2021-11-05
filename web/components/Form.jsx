@@ -2,24 +2,26 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import usePersons from "../hooks/usePersons";
 import Link from "next/link";
-import uploadImage from "../hooks/usePicture";
+import usePicture from "../hooks/usePicture";
+
+const bucketUrl =
+  "https://patrick-image-upload-test-api-s3uploadbucket-u0ogrkb5yzw0.s3.amazonaws.com";
 
 export default function Form() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const { postPerson, success, error } = usePersons();
-  const [imageUrl, setImageUrl] = useState("");
+  const [key, setKey] = useState("");
+  const [isUploading, setUploading] = useState(false);
 
-  const uploadFile = async (event) => {
-    const formData = new FormData();
-    formData.append("formFile", event.target.files[0]);
-    
-    const imageUrlUploaded = await uploadImage(formData);
-    setImageUrl(imageUrlUploaded);
-  };
+  const { postPerson, success, error } = usePersons();
+  const { getS3SignUrl, pushProfilePhotoToS3, createImageFromFile } = usePicture();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  async function handleUploadChange() {
+    setUploading(true);
+    const { uploadURL, Key } = await getS3SignUrl();
+    await pushProfilePhotoToS3(uploadURL);
+    setKey(Key);
+    setUploading(false);
+  }
 
   if (success) {
     return (
@@ -52,7 +54,7 @@ export default function Form() {
       <form
         className="w-full md:w-3/5 pt-12"
         onSubmit={handleSubmit((data) => {
-          const dataWithImage = { imageUrl, ...data };
+          const dataWithImage = { imageUrl: `${bucketUrl}/${key}`, ...data };
           postPerson(dataWithImage);
         })}
       >
@@ -286,17 +288,29 @@ export default function Form() {
             )}
           </div>
           <div className="flex mt-8">
-            <div className="lg shadow-xl bg-black text-white w-full text-white text-sm">
+            <div className="lg shadow-xl bg-black w-full text-white text-sm">
               <div className="m-4">
                 <label className="inline-block mb-2">
                   Upload Image(jpg,png,svg,jpeg)*
                 </label>
-                <br />
                 <input
+                  className="block"
                   type="file"
-                  {...register("imageUrl", { required: "Required field" })}
-                  onChange={uploadFile}
+                  {...register("image", { required: "Required field" })}
+                  onChange={(e) => {
+                    setKey("");
+                    createImageFromFile(e);
+                  }}
                 />
+                <br />
+                {!key && (
+                  <span className="inline-block bg-blue-900 p-5 uppercase cursor-pointer" onClick={handleUploadChange}>
+                    Confirm image
+                  </span>
+                )}
+                {key && !isUploading && (
+                  <img src={`${bucketUrl}/${key}`} alt="Profile picture"></img>
+                )}
                 {errors.imageUrl && (
                   <p className="text-red-500 text-xs">
                     {errors.imageUrl.message}
