@@ -18,9 +18,11 @@ function usePersons() {
   const postPerson = async (formData) => {
     const data = {
       id: (maxIdPersons + 1).toString(),
-      imageUrl: "",
+      imageUrl: formData.imageUrl,
       ...formData,
     };
+
+    console.log(data)
 
     const requestOptions = {
       method: "POST",
@@ -30,21 +32,21 @@ function usePersons() {
       body: JSON.stringify(data),
     };
 
-    return await fetch(
-      "https://o3fp0fun12.execute-api.us-east-1.amazonaws.com/Prod/",
-      requestOptions
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setSuccess(true);
-        setError(false);
-        console.log("Success:", data);
-      })
-      .catch((err) => {
-        setError("An error occurred while sending the data.");
-        setSuccess(false);
-        console.error("Error:", err);
-      });
+    // return await fetch(
+    //   "https://o3fp0fun12.execute-api.us-east-1.amazonaws.com/Prod/",
+    //   requestOptions
+    // )
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setSuccess(true);
+    //     setError(false);
+    //     console.log("Success:", data);
+    //   })
+    //   .catch((err) => {
+    //     setError("An error occurred while sending the data.");
+    //     setSuccess(false);
+    //     console.error("Error:", err);
+    //   });
   };
 
   return { persons, postPerson, success, error };
