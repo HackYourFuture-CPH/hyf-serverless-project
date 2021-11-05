@@ -13,14 +13,13 @@ function usePersons() {
     setError(false)
   }, [personsData]);
 
-  const maxIdPersons = persons && Math.max(...persons.map((p) => p.id));
-
   const postPerson = async (formData) => {
     const data = {
-      id: (maxIdPersons + 1).toString(),
-      imageUrl: "",
+      imageUrl: formData.imageUrl,
       ...formData,
     };
+
+    console.log(data)
 
     const requestOptions = {
       method: "POST",
