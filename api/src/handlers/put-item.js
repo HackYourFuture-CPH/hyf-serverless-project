@@ -1,8 +1,8 @@
 const dynamodb = require("aws-sdk/clients/dynamodb");
 const docClient = new dynamodb.DocumentClient();
-const aws = require("aws-sdk"); 
+const aws = require("aws-sdk");
 
-const tableName = 'HYFAlumnis-PersonsTable-ADUBDS3KB7RW';
+const tableName = "HYFAlumnis-PersonsTable-ADUBDS3KB7RW";
 exports.putPersonsHandler = async (event, context) => {
   if (event.httpMethod !== "POST") {
     throw new Error(
@@ -26,11 +26,9 @@ exports.putPersonsHandler = async (event, context) => {
       linkedIn: body.linkedIn,
       github: body.github,
       comment: body.comment,
-      imageUrl: "?",
+      imageUrl: body.imageUrl,
     },
   };
-
-  
 
   const result = await docClient.put(params).promise();
 
@@ -38,7 +36,7 @@ exports.putPersonsHandler = async (event, context) => {
     statusCode: 200,
     headers: {
       "Access-Control-Allow-Headers":
-      "Content-Type,X-Amz-Date,Authorization,X-Api-Key,x-requested-with",
+        "Content-Type,X-Amz-Date,Authorization,X-Api-Key,x-requested-with",
       "Access-Control-Allow-Origin": "*", // Allow from anywhere
       "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT,DELETE,PATCH",
     },
@@ -48,11 +46,13 @@ exports.putPersonsHandler = async (event, context) => {
   // after results in put
   const sns = new aws.SNS();
   const paramsSNS = {
-    Message: `ID: ${body.id}, Name: ${body.fullname} got placed in ${body.company}`,
+    Message: `${body.id}`,
     Subject: "New job position received",
-    TopicArn: "arn:aws:sns:us-east-1:699804860351:Alumni_Got_Employed", //topic arn goes here
+    TargetArn:
+      "arn:aws:sns:us-east-1:699804860351:sns-slack-handler-SimpleTopic-ZYHKZQJSSR3V",
   };
-  sns.publish(paramsSNS, context.done);
+
+  await sns.publish(paramsSNS).promise();
 
   console.info(
     `response from: ${event.path} statusCode: ${response.statusCode} body: ${response.body}`

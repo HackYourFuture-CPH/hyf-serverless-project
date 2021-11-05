@@ -101,30 +101,38 @@ export default function Form() {
         })}
       >
         <div className="px-4 py-5 bg-gray-100 lg:p-6">
+<<<<<<< HEAD:web/components/Form.jsx
+          <h1 className="font-bold mb-6 mt-3 text-xl text-blue-800">
+=======
           <h1 className="font-bold mb-6 text-xl text-blue-800">
+<<<<<<< HEAD:web/components/Form.jsx
+            {imageUrl && <img src={imageUrl} alt="Profile picture" />}
+>>>>>>> 8ac6956 (Create initial solution of image uploading):web/components/Form.js
+=======
+>>>>>>> c672980 (working solution):web/components/Form.js
             Fill out the form:
           </h1>
           <div className="grid grid-cols-6 gap-6 w-full">
             <div className="col-span-6 sm:col-span-3 w-full">
               <label
-                htmlFor="firstName"
+                htmlFor="fullname"
                 className="block text-sm font-medium text-gray-500"
               >
                 Full Name*
               </label>
               <input
-                {...register("fullName", {
+                {...register("fullname", {
                   required: "Required field",
                 })}
                 type="text"
-                name="fullName"
-                id="fullName"
+                name="fullname"
+                id="fullname"
                 autoComplete="given-name"
                 className="placeholder-gray-500 pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
               />
-              {errors.fullName && (
+              {errors.fullname && (
                 <p className="text-red-500 text-xs">
-                  {errors.fullName.message}
+                  {errors.fullname.message}
                 </p>
               )}
             </div>
@@ -218,22 +226,22 @@ export default function Form() {
           </div>
           <div className="col-span-6 sm:col-span-3">
             <label
-              htmlFor="linkedin"
+              htmlFor="linkedIn"
               className="block text-sm mt-5 font-medium text-gray-500"
             >
               LinkedIn url*
             </label>
             <input
               type="text"
-              {...register("linkedin", {
+              {...register("linkedIn", {
                 required: "Required field",
               })}
-              id="linkedin"
-              autoComplete="linkedin"
+              id="linkedIn"
+              autoComplete="linkedIn"
               className="placeholder-gray-500 pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
             />
-            {errors.linkedin && (
-              <p className="text-red-500 text-xs">{errors.linkedin.message}</p>
+            {errors.linkedIn && (
+              <p className="text-red-500 text-xs">{errors.linkedIn.message}</p>
             )}
           </div>
           <div className="col-span-6 sm:col-span-3">
@@ -369,7 +377,7 @@ export default function Form() {
           <div>
             <button
               type="submit"
-              className="group relative flex justify-center py-4 px-8 mt-8 border border-transparent text-sm font-medium text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="group relative flex justify-center py-4 px-8 mt-8 border border-transparent text-sm font-medium text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 uppercase"
             >
               Submit
             </button>
