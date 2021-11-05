@@ -304,7 +304,7 @@ export default function Form() {
                 />
                 <br />
                 {!key && (
-                  <span className="block" onClick={handleUploadChange}>
+                  <span className="inline-block bg-blue-900 p-5 uppercase cursor-pointer" onClick={handleUploadChange}>
                     Confirm image
                   </span>
                 )}
