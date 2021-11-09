@@ -3,18 +3,19 @@ import Footer from "../components/Footer";
 import Main from "../components/Main";
 import Card from "../components/Card";
 import Link from "next/link";
-export const baseURL = process.env.AWS_BASE_URL;
+import usePersons from "../hooks/usePersons";
 
-export default function Home({ data }) {
+export default function Home() {
+  const { persons } = usePersons();
+
   return (
     <div className="flex flex-col w-full h-auto font-mono">
       <Header />
       <Main />
       <div className="grid grid-cols-2 gap-4 pt-3 p-4">
-        {data &&
-          data.map((person) => {
-            return <Card member={person} />;
-          })}
+        {persons.map((person) => {
+          return <Card member={person} />;
+        })}
       </div>
       <div className="w-full flex flex-row justify-between mt-5 bg-gray-200">
         <img
@@ -40,20 +41,4 @@ export default function Home({ data }) {
       <Footer />
     </div>
   );
-}
-
-export async function getStaticProps() {
-  const res = await fetch(
-    "https://o3fp0fun12.execute-api.us-east-1.amazonaws.com/Prod/"
-  );
-  const data = await res.json();
-
-  if (!data) {
-    return {
-      notFound: true,
-    };
-  }
-  return {
-    props: { data }, // will be passed to the page component as props
-  };
 }
